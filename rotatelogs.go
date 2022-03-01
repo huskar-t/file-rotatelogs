@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lestrrat-go/file-rotatelogs/internal/fileutil"
+	"github.com/huskar-t/file-rotatelogs/internal/fileutil"
 	strftime "github.com/lestrrat-go/strftime"
 	"github.com/pkg/errors"
 )
