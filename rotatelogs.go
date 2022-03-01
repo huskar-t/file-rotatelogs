@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -26,7 +27,7 @@ func (c clockFn) Now() time.Time {
 // New creates a new RotateLogs object. A log filename pattern
 // must be passed. Optional `Option` parameters may be passed
 func New(p string, options ...Option) (*RotateLogs, error) {
-	globPattern := p
+	globPattern := p + "*"
 	for _, re := range patternConversionRegexps {
 		globPattern = re.ReplaceAllString(globPattern, "*")
 	}
@@ -316,8 +317,8 @@ func (rl *RotateLogs) rotateNolock(filename string) error {
 
 	cutoff := rl.clock.Now().Add(-1 * rl.maxAge)
 
-	// the linter tells me to pre allocate this...
-	toUnlink := make([]string, 0, len(matches))
+	toUnlinkFl := make([]os.FileInfo, 0, len(matches))
+	m := make(map[os.FileInfo]string)
 	for _, path := range matches {
 		// Ignore lock files
 		if strings.HasSuffix(path, "_lock") || strings.HasSuffix(path, "_symlink") {
@@ -341,9 +342,16 @@ func (rl *RotateLogs) rotateNolock(filename string) error {
 		if rl.rotationCount > 0 && fl.Mode()&os.ModeSymlink == os.ModeSymlink {
 			continue
 		}
-		toUnlink = append(toUnlink, path)
+		m[fl] = path
+		toUnlinkFl = append(toUnlinkFl, fl)
 	}
-
+	sort.Slice(toUnlinkFl, func(i, j int) bool {
+		return toUnlinkFl[i].ModTime().Before(toUnlinkFl[j].ModTime())
+	})
+	toUnlink := make([]string, 0, len(toUnlinkFl))
+	for _, info := range toUnlinkFl {
+		toUnlink = append(toUnlink, m[info])
+	}
 	if rl.rotationCount > 0 {
 		// Only delete if we have more than rotationCount
 		if rl.rotationCount >= uint(len(toUnlink)) {

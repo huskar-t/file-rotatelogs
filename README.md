@@ -1,4 +1,4 @@
-file-rotatelogs
+file-rotatelogs(copy from https://github.com/lestrrat-go/file-rotatelogs)
 ==================
 
 Provide an `io.Writer` that periodically rotates log files from within the application. Port of [File::RotateLogs](https://metacpan.org/release/File-RotateLogs) from Perl to Go.
