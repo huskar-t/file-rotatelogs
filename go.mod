@@ -1,4 +1,4 @@
-module github.com/huskar-t/file-rotatelogs
+module github.com/huskar-t/file-rotatelogs/v2
 
 go 1.12
 

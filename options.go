@@ -3,7 +3,7 @@ package rotatelogs
 import (
 	"time"
 
-	"github.com/huskar-t/file-rotatelogs/internal/option"
+	"github.com/huskar-t/file-rotatelogs/v2/internal/option"
 )
 
 const (

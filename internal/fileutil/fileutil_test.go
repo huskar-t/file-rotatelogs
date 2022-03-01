@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/huskar-t/file-rotatelogs/internal/fileutil"
+	"github.com/huskar-t/file-rotatelogs/v2/internal/fileutil"
 	"github.com/jonboulle/clockwork"
 	"github.com/lestrrat-go/strftime"
 	"github.com/stretchr/testify/assert"

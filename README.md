@@ -1,11 +1,11 @@
-file-rotatelogs(copy from https://github.com/huskar-t/file-rotatelogs)
+file-rotatelogs(copy from https://github.com/huskar-t/file-rotatelogs/v2)
 ==================
 
 Provide an `io.Writer` that periodically rotates log files from within the application. Port of [File::RotateLogs](https://metacpan.org/release/File-RotateLogs) from Perl to Go.
 
 [![Build Status](https://travis-ci.org/lestrrat-go/file-rotatelogs.png?branch=master)](https://travis-ci.org/lestrrat-go/file-rotatelogs)
 
-[![GoDoc](https://godoc.org/github.com/huskar-t/file-rotatelogs?status.svg)](https://godoc.org/github.com/huskar-t/file-rotatelogs)
+[![GoDoc](https://godoc.org/github.com/huskar-t/file-rotatelogs/v2?status.svg)](https://godoc.org/github.com/huskar-t/file-rotatelogs/v2)
 
 # WARNINGS
 
@@ -20,7 +20,7 @@ import (
   "net/http"
 
   apachelog "github.com/lestrrat-go/apache-logformat"
-  rotatelogs "github.com/huskar-t/file-rotatelogs"
+  rotatelogs "github.com/huskar-t/file-rotatelogs/v2"
 )
 
 func main() {
@@ -54,7 +54,7 @@ to setup logrotate!
 To install, simply issue a `go get`:
 
 ```
-go get github.com/huskar-t/file-rotatelogs
+go get github.com/huskar-t/file-rotatelogs/v2
 ```
 
 It's normally expected that this library is used with some other
@@ -64,7 +64,7 @@ such as `github.com/lestrrat-go/apache-logformat`.
 ```go
 import(
   "log"
-  "github.com/huskar-t/file-rotatelogs"
+  "github.com/huskar-t/file-rotatelogs/v2"
 )
 
 func main() {
